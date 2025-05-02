@@ -8,12 +8,12 @@
   - `Category`: Represents years (2009–2024), linked to products.
   - `Product`: Stores movie details (name, description, price, category, location).
   - `Order`: Tracks user purchases (user, product, quantity, order_date).
-- **Dataset**: Sourced from `movies_2009_2024_clean.csv`, available at [https://github.com/Muzaffar1260/screenplay-superstore](https://github.com/Muzaffar1260/screenplay-superstore). Provides ~3200 products across 16 categories, with duplicates resolved.
+- **Dataset**: Sourced from `movies_2009_2024_clean.csv`, available at [https://www.kaggle.com/datasets/harios/box-office-data-1984-to-2024-from-boxofficemojo].
 - **Architecture**: Follows Django’s MVT pattern, with templates styled using inline CSS for a card-based UI.
 
 ### Data Cleaning
-The original dataset (`movies_2009_2024.csv`) contained duplicates and inconsistencies:
-- **Duplicates**: Multiple entries for the same movie title were removed by enforcing unique constraints on the `Product` model (`unique_together` on `name` and `category`).
+The original dataset (`boxoffice_data_2024.csv`) contained lots of entries:
+- **Filtering**: Dataset was filtered down to 3200 row by electing movie from 2009 to 2024 and multiple entries for the same movie title were removed by enforcing unique constraints on the `Product` model (`unique_together` on `name` and `category`).
 - **Inconsistencies**: Missing or malformed fields (e.g., price, description) were handled by setting default values (e.g., price=0) and generating descriptions ("Experience the magic of [Title]!").
 - **Categories**: Extracted years as categories (2009–2024), resulting in 16 distinct categories.
 - **Result**: The cleaned dataset (`movies_2009_2024_clean.csv`) contains ~3200 unique products, loaded via a custom management command (`load_data`).
