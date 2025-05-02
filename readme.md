@@ -13,10 +13,10 @@
 
 ### Data Cleaning
 The original dataset (`boxoffice_data_2024.csv`) contained lots of entries:
-- **Filtering**: Dataset was filtered down to 3200 row by electing movie from 2009 to 2024 and multiple entries for the same movie title were removed by enforcing unique constraints on the `Product` model (`unique_together` on `name` and `category`).
-- **Inconsistencies**: Missing or malformed fields (e.g., price, description) were handled by setting default values (e.g., price=0) and generating descriptions ("Experience the magic of [Title]!").
-- **Categories**: Extracted years as categories (2009–2024), resulting in 16 distinct categories.
-- **Result**: The cleaned dataset (`movies_2009_2024_clean.csv`) contains ~3200 unique products, loaded via a custom management command (`load_data`).
+- **Filtering**: The filtering process reduced the dataset to 3200 rows through selection of movies from 2009 to 2024 while unique constraints applied to the Product model removed multiple entries of duplicate movie titles.
+- **Inconsistencies**: Missing fields (e.g., price, description) were handled by setting default values (e.g., price=0) and generating descriptions ("Experience the magic of [Title]!").
+- **Categories**: Years (2009 to 2024) were converted into a category to create a total of 16 separate categories.
+- **Result**: The cleaned dataset (`movies_2009_2024_clean.csv`) contains ~3200 unique products that load through the custom management command. (`load_data`).
 
 ### Development
 - **Tools**: Developed using PyCharm Community Edition, Python 3, and Django 5.
