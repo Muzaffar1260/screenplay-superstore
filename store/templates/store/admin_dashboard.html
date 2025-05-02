@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Dashboard</title>
+</head>
+<body>
+
+{% extends 'store/base.html' %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+    <div class="dashboard">
+        <h1>Admin Dashboard</h1>
+        <div class="orders-section">
+            <h2>Orders</h2>
+            <ul class="order-list">
+                {% for order in orders %}
+                    <li class="order-item">
+                        {{ order.user.username }} ordered {{ order.product.name }} (x{{ order.quantity }}) on {{ order.order_date|date:"F d, Y" }}
+                    </li>
+                {% empty %}
+                    <li>No orders yet.</li>
+                {% endfor %}
+            </ul>
+        </div>
+        <div class="chart-section">
+            <h2>Orders by Year</h2>
+            <canvas id="orderChart"></canvas>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('orderChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ years|safe }},
+                datasets: [{
+                    label: 'Orders by Year',
+                    data: {{ counts|safe }},
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+    <style>
+        .dashboard {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .orders-section, .chart-section {
+            margin-bottom: 2rem;
+        }
+        .order-list {
+            list-style: none;
+            padding: 0;
+        }
+        .order-item {
+            padding: 0.5rem;
+            border-bottom: 1px solid #eee;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        #orderChart {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+    </style>
+{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Page</title>
+</head>
+<body>
+
+{% extends 'store/base.html' %}
+
+{% block title %}Order {{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="order-form">
+        <h1>Order {{ product.name }}</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <label>Quantity: <input type="number" name="quantity" value="1" min="1"></label>
+            <button type="submit">Place Order</button>
+        </form>
+        <a href="{% url 'product_detail' product.pk %}">Back to Product</a>
+    </div>
+    <style>
+        .order-form {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+{% endblock %}
+
+</body>
+</html>

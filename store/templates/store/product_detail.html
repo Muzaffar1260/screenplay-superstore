@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Details</title>
+</head>
+<body>
+
+{% extends 'store/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+    <div class="product-detail">
+        <h1>{{ product.name }}</h1>
+        <p>{{ product.description }}</p>
+        <p><strong>Price:</strong> ${{ product.price }}</p>
+        <p><strong>Category:</strong> {{ product.category.name }}</p>
+        <a href="{% url 'order_create' product.pk %}" class="buy-button">Buy Experience</a>
+        <br>
+        <a href="{% url 'product_list' %}">Back to List</a>
+    </div>
+    <style>
+        .product-detail {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .buy-button {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #e74c3c;
+            color: white;
+            border-radius: 4px;
+            text-decoration: none;
+            margin: 1rem 0;
+        }
+        .buy-button:hover {
+            background-color: #c0392b;
+            text-decoration: none;
+        }
+    </style>
+{% endblock %}
+
+
+</body>
+</html>

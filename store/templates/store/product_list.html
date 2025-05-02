@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Screenplay Superstore - Home</title>
+</head>
+<body>
+
+{% extends 'store/base.html' %}
+
+{% block title %}Product List{% endblock %}
+
+{% block content %}
+    <h1>Screenplay Superstore</h1>
+    <form method="GET">
+        <input type="text" name="q" placeholder="Search movies..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+    <ul class="product-list">
+        {% for product in products %}
+            <li class="product-item">
+                <a href="{% url 'product_detail' product.pk %}">{{ product.name }}</a> - ${{ product.price }}
+            </li>
+        {% empty %}
+            <li>No movies found.</li>
+        {% endfor %}
+    </ul>
+    <style>
+        .product-list {
+            list-style: none;
+            padding: 0;
+        }
+        .product-item {
+            background-color: white;
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .product-item a {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+    </style>
+{% endblock %}
+
+</body>
+</html>
